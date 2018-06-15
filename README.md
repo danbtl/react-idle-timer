@@ -52,6 +52,7 @@ module.exports = YourApp
 - **idleAction** {*Function*} - Function to call on idle
 - **activeAction** {*Function*} - Function to call on active
 - **element** {*Object*} - Defaults to document, may pass a ref to another element
+- **idleOnLoad** {*Boolean*} - If the component should be in _idle_ state when first mounted. Defaults to `false`.
 - **startOnLoad** {*Boolean*} - Start the timer on component load.  Defaults to `true`. Set to false to wait for user action before starting timer.
 
 ## Methods

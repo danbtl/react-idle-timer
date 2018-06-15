@@ -16,7 +16,8 @@ export default class IdleTimer extends Component {
     idleAction: PropTypes.func, // Action to call when user becomes inactive
     activeAction: PropTypes.func, // Action to call when user becomes active
     element: PropTypes.oneOfType([PropTypes.object, PropTypes.string]), // Element ref to watch activty on
-    startOnLoad: PropTypes.bool
+    idleOnLoad: PropTypes.bool, // Whether the component is in idle state when mounting
+    startOnLoad: PropTypes.bool // Whether the timers start automatically when mounting
   };
 
   static defaultProps = {
@@ -25,11 +26,12 @@ export default class IdleTimer extends Component {
       idleAction: () => {},
       activeAction: () => {},
       element: (typeof window === 'undefined' ? 'undefined' : typeof (window)) === 'object' ? document : {},
+      idleOnLoad: false,
       startOnLoad: true
   };
 
   state = {
-    idle: false,
+    idle: this.props.idleOnLoad,
     oldDate: +new Date(),
     lastActive: +new Date(),
     remaining: null,
@@ -45,7 +47,7 @@ export default class IdleTimer extends Component {
   }
 
   componentDidMount() {
-    if (this.props.startOnLoad) {
+    if (this.props.startOnLoad && !this.props.idleOnLoad) {
       this.reset();
     }
   }
